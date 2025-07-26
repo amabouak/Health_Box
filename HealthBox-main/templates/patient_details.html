@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBox - Détails du patient</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-50 min-h-screen font-sans p-8">
+    <div class="max-w-4xl mx-auto">
+        <button onclick="window.location.href='{{ url_for('patient_list_page') }}'" class="mb-6 flex items-center text-blue-600 hover:text-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Retour à la liste des patients
+        </button>
+        
+        <h1 class="text-3xl font-bold text-blue-900 mb-6">Détails du patient</h1>
+        
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h2 class="text-2xl font-semibold text-blue-800">{{ patient.firstName }} {{ patient.lastName }}</h2>
+                    <p class="text-gray-500">ID: {{ patient.id }}</p>
+                </div>
+                <span class="bg-blue-100 text-blue-800 text-sm px-4 py-2 rounded-full">{{ patient.gender }}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-4 text-gray-600">
+                <div>Âge: <span class="font-medium">{{ patient.age }} ans</span></div>
+                <div>Inscrit le: <span class="font-medium">{{ patient.registrationDate }}</span></div>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-blue-900 mb-4">Historique des diagnostics</h2>
+        <div id="diagnosis-history-container" class="space-y-4">
+            {% if patient.diagnoses %}
+                {% for diagnosis in patient.diagnoses | reverse %} {# Afficher du plus récent au plus ancien #}
+                    <div class="bg-white rounded-xl shadow-md p-4 border-l-4 {% if diagnosis.severity == 'Sévère' %}border-red-500{% elif diagnosis.severity == 'Modéré' or diagnosis.severity == 'Modéré à sévère' %}border-orange-500{% else %}border-green-500{% endif %}">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-lg font-semibold text-gray-800">Diagnostic du {{ diagnosis.date }}</h3>
+                            <span class="px-3 py-1 rounded-full text-sm font-medium {% if diagnosis.severity == 'Sévère' %}bg-red-100 text-red-800{% elif diagnosis.severity == 'Modéré' or diagnosis.severity == 'Modéré à sévère' %}bg-orange-100 text-orange-800{% else %}bg-green-100 text-green-800{% endif %}">
+                                {{ diagnosis.diagnosis }} ({{ diagnosis.severity }})
+                            </span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-sm text-gray-600">
+                            <div>BPM: <span class="font-medium">{{ diagnosis.bpm }}</span></div>
+                            <div>Température: <span class="font-medium">{{ diagnosis.temperature }}°C</span></div>
+                            <div class="col-span-2">Symptômes: 
+                                {% if diagnosis.symptoms %}
+                                    {% for symptom in diagnosis.symptoms %}
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 mr-1 mb-1">{{ symptom }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="italic">Aucun symptôme rapporté</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-gray-500 text-center py-4">Aucun diagnostic enregistré pour ce patient.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

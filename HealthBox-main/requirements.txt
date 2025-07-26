@@ -1,0 +1,3 @@
+Flask
+scikit-learn # Pour un modèle d'IA simple, si vous en utilisez un
+numpy        # Souvent une dépendance de scikit-learn

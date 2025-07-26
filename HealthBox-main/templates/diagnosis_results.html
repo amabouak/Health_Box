@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBox - Résultats du diagnostic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-50 min-h-screen font-sans p-8">
+    <div class="max-w-4xl mx-auto">
+        <button id="back-to-form" class="mb-6 flex items-center text-blue-600 hover:text-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Retour au formulaire
+        </button>
+        
+        <div id="diagnosis-header" class="mb-8">
+            <h1 class="text-3xl font-bold text-blue-900 mb-2">Résultats du diagnostic</h1>
+            <div id="patient-info-result" class="text-gray-600"></div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+            <div id="diagnosis-status" class="p-6 border-b border-gray-200">
+                <!-- Will be filled by JavaScript -->
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="p-6 border-b md:border-b-0 md:border-r border-gray-200">
+                    <h3 class="text-lg font-semibold mb-4">Statistiques vitales</h3>
+                    <div id="vital-stats" class="space-y-4">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold mb-4">Symptômes rapportés</h3>
+                    <div id="reported-symptoms" class="flex flex-wrap gap-2">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Graphique d'évolution -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h3 class="text-lg font-semibold mb-4">Projection de l'évolution</h3>
+            <div class="h-64">
+                <canvas id="progression-chart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Recommandations -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-lg font-semibold mb-4">Recommandations médicales</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-medium mb-2 text-blue-800">Conseils à suivre</h4>
+                    <div id="advice-list" class="space-y-2">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-2 text-blue-800">Traitement recommandé</h4>
+                    <div id="treatment-list" class="space-y-2">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Récupérer les données du diagnostic stockées temporairement
+        document.addEventListener('DOMContentLoaded', () => {
+            const diagnosisData = JSON.parse(localStorage.getItem('lastDiagnosisResult'));
+            const urlParams = new URLSearchParams(window.location.search);
+            const patientIdFromQuery = urlParams.get('patient_id');
+
+            if (diagnosisData) {
+                displayDiagnosisResults(
+                    diagnosisData.patient, 
+                    diagnosisData.diagnosisInfo, 
+                    diagnosisData.vitals.bpm, 
+                    diagnosisData.vitals.temperature, 
+                    diagnosisData.reportedSymptoms
+                );
+            } else if (!patientIdFromQuery) {
+                // Rediriger si pas de données de diagnostic ni patient_id en query (ex: accès direct à la page)
+                window.location.href = '{{ url_for('main_menu_page') }}';
+                return;
+            }
+
+            // Mettre à jour le bouton retour avec l'ID du patient
+            const backButton = document.getElementById('back-to-form');
+            if (backButton) {
+                const patientIdToUse = diagnosisData ? diagnosisData.patient.id : patientIdFromQuery;
+                backButton.onclick = () => {
+                    const baseUrl = "{{ url_for('diagnosis_form_page', patient_id='PLACEHOLDER') }}";
+                    window.location.href = baseUrl.replace('PLACEHOLDER', patientIdToUse);
+                };
+            }
+
+            localStorage.removeItem('lastDiagnosisResult'); // Nettoyer le stockage
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBox - Menu Principal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-50 min-h-screen font-sans p-8">
+    <div class="max-w-6xl mx-auto">
+        <button onclick="window.location.href='{{ url_for('home_page') }}'" class="mb-6 flex items-center text-blue-600 hover:text-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Retour à l'accueil
+        </button>
+        
+        <h1 class="text-3xl font-bold text-blue-900 mb-8">Menu Principal</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Créer un patient -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 cursor-pointer hover:shadow-lg transition duration-300" onclick="window.location.href='{{ url_for('create_patient_page') }}'">
+                <div class="text-center">
+                    <div class="flex justify-center mb-4">
+                        <img src="{{ url_for('static', filename='images/add_patient.png') }}" alt="Icône ajouter patient" class="w-24 h-24 object-contain" />
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Créer un patient</h3>
+                    <p class="text-gray-600">Ajouter un nouveau patient dans le système</p>
+                </div>
+            </div>
+            
+            <!-- Liste des patients -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 cursor-pointer hover:shadow-lg transition duration-300" onclick="window.location.href='{{ url_for('patient_list_page') }}'">
+                <div class="text-center">
+                    <div class="flex justify-center mb-4">
+                        <img src="{{ url_for('static', filename='images/patient_list.png') }}" alt="Icône liste patients" class="w-24 h-24 object-contain" />
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Liste des patients</h3>
+                    <p class="text-gray-600">Voir et gérer tous les patients enregistrés</p>
+                </div>
+            </div>
+            
+            <!-- Effectuer un diagnostic -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 cursor-pointer hover:shadow-lg transition duration-300" onclick="window.location.href='{{ url_for('diagnosis_entry_page') }}'">
+                <div class="text-center">
+                    <div class="flex justify-center mb-4">
+                        <img src="{{ url_for('static', filename='images/diagnosis.png') }}" alt="Icône diagnostic" class="w-24 h-24 object-contain" />
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Effectuer un diagnostic</h3>
+                    <p class="text-gray-600">Analyser l'état de santé d'un patient</p>
+                </div>
+            </div>
+
+            <!-- Tableau de bord (Nouvelle fonctionnalité) -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 cursor-pointer hover:shadow-lg transition duration-300" onclick="window.location.href='{{ url_for('dashboard_page') }}'">
+                <div class="text-center">
+                    <div class="flex justify-center mb-4">
+                        <img src="{{ url_for('static', filename='images/dashboard.png') }}" alt="Icône tableau de bord" class="w-24 h-24 object-contain" />
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Tableau de bord</h3>
+                    <p class="text-gray-600">Visualiser les statistiques globales</p>
+                </div>
+            </div>
+
+            <!-- Consultation Vidéo (Nouvelle fonctionnalité) -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 cursor-pointer hover:shadow-lg transition duration-300" onclick="window.location.href='{{ url_for('video_consultation_page') }}'">
+                <div class="text-center">
+                    <div class="flex justify-center mb-4">
+                        <img src="{{ url_for('static', filename='images/video_call.png') }}" alt="Icône consultation vidéo" class="w-24 h-24 object-contain" />
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-blue-800">Consultation Vidéo</h3>
+                    <p class="text-gray-600">Simuler une téléconsultation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

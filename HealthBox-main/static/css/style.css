@@ -1,0 +1,76 @@
+/* static/css/style.css */
+
+/* Curseur personnalisé pour tout le site */
+body {
+    /* cursor: url('../images/cursor.cur'), auto; */
+
+}
+
+/* Styles pour l'image de fond de la page d'accueil */
+#home-page {
+    background-image: url('../images/background.jpg'); /* Remplacez par le chemin de votre image de fond */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative; /* Nécessaire pour positionner les éléments enfants */
+    z-index: 1; /* Assure que le contenu est au-dessus de l'image de fond */
+}
+
+/* Overlay pour rendre le texte plus lisible sur l'image de fond */
+#home-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay sombre semi-transparent */
+    z-index: -1; /* Place l'overlay derrière le contenu mais devant l'image de fond */
+}
+
+/* Styles pour le texte central */
+.main-title {
+    font-family: 'Georgia', serif; /* Exemple de police plus élégante */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Ombre pour le texte */
+}
+
+/* Styles pour les logos */
+.home-logo {
+    width: 120px; /* Taille des logos */
+    height: 120px;
+    object-fit: contain; /* Assure que l'image s'adapte sans être coupée */
+    margin: 0 15px; /* Espacement entre les logos */
+}
+
+/* Styles pour le bouton "Entrer" */
+.enter-button {
+    background-color: #4CAF50; /* Vert plus doux */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.enter-button:hover {
+    background-color: #45a049;
+    transform: scale(1.08);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Amélioration générale du texte de la page d'accueil */
+.home-description {
+    color: #e0e0e0; /* Texte plus clair pour le contraste */
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Ajustements pour le conteneur principal de la page d'accueil */
+#home-page > div {
+    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent pour le contenu */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px); /* Effet de flou derrière le contenu */
+}

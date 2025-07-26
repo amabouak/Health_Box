@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBox - Effectuer un diagnostic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-50 min-h-screen font-sans p-8">
+    <div class="max-w-2xl mx-auto">
+        <button onclick="window.location.href='{{ url_for('main_menu_page') }}'" class="mb-6 flex items-center text-blue-600 hover:text-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Retour au menu
+        </button>
+        
+        <h1 class="text-3xl font-bold text-blue-900 mb-8">Effectuer un diagnostic</h1>
+        
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="mb-6">
+                <label for="patient-id" class="block text-sm font-medium text-gray-700 mb-1">ID du patient*</label>
+                <input type="text" id="patient-id" placeholder="Entrez l'ID du patient" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                <p class="mt-2 text-sm text-gray-500">Vous pouvez trouver l'ID du patient dans la <a href="{{ url_for('patient_list_page') }}" class="text-blue-600 hover:underline">liste des patients</a></p>
+            </div>
+            
+            <button onclick="findPatientForDiagnosis()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                Rechercher le patient
+            </button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

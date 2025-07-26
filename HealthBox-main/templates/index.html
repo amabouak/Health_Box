@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBox - Gestion Médicale Intelligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .page {
+            display: none;
+        }
+        .active-page {
+            display: block;
+        }
+        .patient-card {
+            transition: all 0.3s;
+        }
+        .patient-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+    <!-- Page d'accueil -->
+    <div id="home-page" class="page active-page min-h-screen flex flex-col items-center justify-center p-4 fade-in">
+        <div class="text-center max-w-3xl">
+            <div class="flex justify-center mb-8">
+                <img src="{{ url_for('static', filename='images/logo_esitec.jpeg') }}" alt="Logo HealthBox 1" class="home-logo rounded-full border-4 border-blue-500" />
+                <img src="{{ url_for('static', filename='images/HealthBox.png') }}" alt="Logo HealthBox 2" class="home-logo rounded-full border-4 border-green-500" />
+            </div>
+            <h1 class="text-5xl font-extrabold text-white mb-4 main-title">HealthBox</h1>
+            <h2 class="text-3xl text-blue-200 mb-8">Gestion Médicale Intelligente</h2>
+            
+            <p class="text-4xl font-bold text-white mb-10 home-description">
+                Projet de détection et de suivi de maladie
+            </p>
+
+            <button onclick="window.location.href='{{ url_for('main_menu_page') }}'" class="enter-button text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 transform hover:scale-105">
+                Entrer
+            </button>
+        </div>
+    </div>
+
+    <!-- Le reste des pages sera chargé via les routes Flask -->
+    <audio id="welcome-audio" src="{{ url_for('static', filename='voice/bonjour.wav') }}" preload="auto"></audio>
+    <script>
+        window.addEventListe 
+            var audio = document.getElementById('welcome-audio');
+            audio.play().catch(function(error) {
+                console.warn('Audio playback failed:', error);
+            });
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

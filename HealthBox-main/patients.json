@@ -1,0 +1,140 @@
+[
+    {
+        "id": "P-2119",
+        "lastName": "Fatou",
+        "firstName": "Ndiaye",
+        "age": 19,
+        "gender": "Femme",
+        "registrationDate": "26/07/2025",
+        "diagnoses": [
+            {
+                "date": "26/07/2025 03:02",
+                "bpm": 67,
+                "temperature": 37,
+                "symptoms": [],
+                "diagnosis": "Aucune maladie détectée",
+                "severity": "Normal"
+            },
+            {
+                "date": "26/07/2025 03:05",
+                "bpm": 120,
+                "temperature": 45,
+                "symptoms": [],
+                "diagnosis": "Paludisme",
+                "severity": "Sévère"
+            },
+            {
+                "date": "26/07/2025 03:08",
+                "bpm": 222,
+                "temperature": 89,
+                "symptoms": [],
+                "diagnosis": "Paludisme",
+                "severity": "Sévère"
+            },
+            {
+                "date": "26/07/2025 14:43",
+                "bpm": 78,
+                "temperature": 45,
+                "symptoms": [
+                    "Mal de tête"
+                ],
+                "diagnosis": "Aucune maladie détectée",
+                "severity": "Normal"
+            }
+        ]
+    },
+    {
+        "id": "P-7099",
+        "lastName": "Alioune",
+        "firstName": "Camara",
+        "age": 50,
+        "gender": "Homme",
+        "registrationDate": "26/07/2025",
+        "diagnoses": [
+            {
+                "date": "26/07/2025 03:12",
+                "bpm": 90,
+                "temperature": 60,
+                "symptoms": [
+                    "Toux",
+                    "Frissons",
+                    "Vomissements",
+                    "Diarrhée"
+                ],
+                "diagnosis": "Grippe",
+                "severity": "Modéré à sévère"
+            },
+            {
+                "date": "26/07/2025 15:44",
+                "bpm": 67,
+                "temperature": 33,
+                "symptoms": [],
+                "diagnosis": "Aucune maladie détectée",
+                "severity": "Normal"
+            },
+            {
+                "date": "26/07/2025 15:45",
+                "bpm": 136,
+                "temperature": 38,
+                "symptoms": [
+                    "Mal de tête",
+                    "Frissons"
+                ],
+                "diagnosis": "Aucune maladie détectée",
+                "severity": "Normal"
+            },
+            {
+                "date": "26/07/2025 15:45",
+                "bpm": 145,
+                "temperature": 54,
+                "symptoms": [],
+                "diagnosis": "Paludisme",
+                "severity": "Sévère"
+            }
+        ]
+    },
+    {
+        "id": "P-4247",
+        "lastName": "Diasse",
+        "firstName": "Yacine",
+        "age": 20,
+        "gender": "Femme",
+        "registrationDate": "26/07/2025",
+        "diagnoses": [
+            {
+                "date": "26/07/2025 10:53",
+                "bpm": 160,
+                "temperature": 45,
+                "symptoms": [
+                    "Fièvre",
+                    "Mal de tête"
+                ],
+                "diagnosis": "Grippe",
+                "severity": "Modéré à sévère"
+            }
+        ]
+    },
+    {
+        "id": "P-1015",
+        "lastName": "Diouf",
+        "firstName": "Seynabou",
+        "age": 20,
+        "gender": "Femme",
+        "registrationDate": "26/07/2025",
+        "diagnoses": [
+            {
+                "date": "26/07/2025 11:00",
+                "bpm": 159,
+                "temperature": 43,
+                "symptoms": [
+                    "Frissons",
+                    "Vomissements",
+                    "Nausées",
+                    "Diarrhée"
+                ],
+                "diagnosis": "Paludisme",
+                "severity": "Sévère"
+            }
+        ]
+    }
+]

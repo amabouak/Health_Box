@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthBox - Formulaire diagnostic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-50 min-h-screen font-sans p-8">
+    <div class="max-w-2xl mx-auto">
+        <button onclick="window.location.href='{{ url_for('diagnosis_entry_page') }}'" class="mb-6 flex items-center text-blue-600 hover:text-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Retour
+        </button>
+        
+        <h1 class="text-3xl font-bold text-blue-900 mb-2">Diagnostic médical</h1>
+        <div id="patient-info" class="text-gray-600 mb-8">
+            <p>Patient: <span class="font-medium">{{ patient.firstName }} {{ patient.lastName }}</span></p>
+            <p>Âge: <span class="font-medium">{{ patient.age }} ans</span>, Sexe: <span class="font-medium">{{ patient.gender }}</span></p>
+        </div>
+        
+        <form id="medical-form" class="bg-white rounded-xl shadow-md p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label for="bpm" class="block text-sm font-medium text-gray-700 mb-1">Battements par minute (BPM)*</label>
+                    <input type="number" id="bpm" min="30" max="200" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    <p class="mt-1 text-sm text-gray-500">Normale: 60-100 bpm</p>
+                </div>
+                <div>
+                    <label for="temperature" class="block text-sm font-medium text-gray-700 mb-1">Température (°C)*</label>
+                    <input type="number" id="temperature" step="0.1" min="34" max="42" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    <p class="mt-1 text-sm text-gray-500">Normale: 36.5-37.5°C</p>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-3">Symptômes (optionnel)</label>
+                
+                <div class="space-y-2">
+                    <!-- Symptômes de la grippe -->
+                    <fieldset class="border border-gray-200 rounded-lg p-4">
+                        <legend class="text-sm font-medium text-gray-700 px-2">Grippe</legend>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div class="flex items-center">
+                                <input id="fever" type="checkbox" value="Fièvre" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="fever" class="ml-2 text-gray-700">Fièvre</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="cough" type="checkbox" value="Toux" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="cough" class="ml-2 text-gray-700">Toux</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="fatigue" type="checkbox" value="Fatigue" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="fatigue" class="ml-2 text-gray-700">Fatigue</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="headache" type="checkbox" value="Mal de tête" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="headache" class="ml-2 text-gray-700">Mal de tête</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="muscle-pain" type="checkbox" value="Douleurs musculaires" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="muscle-pain" class="ml-2 text-gray-700">Douleurs musculaires</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="chills" type="checkbox" value="Frissons" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="chills" class="ml-2 text-gray-700">Frissons</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    <!-- Symptômes du palu -->
+                    <fieldset class="border border-gray-200 rounded-lg p-4 mt-4">
+                        <legend class="text-sm font-medium text-gray-700 px-2">Paludisme</legend>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div class="flex items-center">
+                                <input id="high-fever" type="checkbox" value="Forte fièvre" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="high-fever" class="ml-2 text-gray-700">Forte fièvre</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="vomiting" type="checkbox" value="Vomissements" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="vomiting" class="ml-2 text-gray-700">Vomissements</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="nausea" type="checkbox" value="Nausées" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="nausea" class="ml-2 text-gray-700">Nausées</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="sweating" type="checkbox" value="Sueurs abondantes" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="sweating" class="ml-2 text-gray-700">Sueurs abondantes</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="abdominal-pain" type="checkbox" value="Douleurs abdominales" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="abdominal-pain" class="ml-2 text-gray-700">Douleurs abdominales</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="diarrhea" type="checkbox" value="Diarrhée" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="diarrhea" class="ml-2 text-gray-700">Diarrhée</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            
+            <div class="mt-8">
+                <button type="button" onclick="analyzeSymptoms('{{ patient.id }}')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                    Analyser les symptômes
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
